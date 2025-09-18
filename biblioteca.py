@@ -1,6 +1,6 @@
 # Inicio de programa
-print("Sistema Biblioteca Mastersystem/ Grupo 2")
-print("------>BIENVENIDOS<-------")
+print("Sistema Biblioteca Universidad Master Senior")
+print("--------> BIENVENIDOS <---------")
 print("--------------------------------")
 
 # Función del menú
@@ -9,7 +9,7 @@ def menu():
     print("1. Registrar estudiante en biblioteca")
     print("2. Estudiante activos en Biblioteca")
     print("3. Desactivar estudiante de Biblioteca")
-    print("4. Consulta de estudiante")
+    print("4. Consulta si estudiante está en Biblioteca")
     print("5. Lista de ingresos")
     print("6. Salir")
     opcion = int(input("Elige una opción: "))
@@ -50,18 +50,18 @@ while True:
         if not estudiante:
             print("No hay estudiantes registrados.")
         else:
-            nombre_borrar = input("Ingrese el nombre del estudiante a eliminar: ")
+            rut_borrar = input("Ingrese el rut del estudiante a eliminar: ")
             encontrado = False
 
-        for est in estudiante:
-            if est["nombre"].lower() == nombre_borrar.lower():  
-                estudiante.remove(est)
-                print(f"Estudiante {nombre_borrar} eliminado correctamente.")
+        for i in estudiante:
+            if str(i["rut"]) == rut_borrar:  
+                estudiante.remove(i)
+                print(f"Estudiante {rut_borrar} eliminado correctamente.")
                 encontrado = True
                 break
 
         if not encontrado:
-            print("No se encontró un estudiante con ese nombre.")
+            print(f"No se encontró un estudiante con RUT {rut_borrar}.")
 
 
         print("--------------------------------")
