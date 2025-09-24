@@ -1,3 +1,5 @@
+import copy
+
 # Inicio de programa
 print("Sistema Biblioteca Universidad Master Senior")
 print("--------> BIENVENIDOS <---------")
@@ -20,13 +22,16 @@ def menu():
 estudiante = []
 rut = []
 carrera = []
+historial_biblioteca = []
 
 # Función ingreso de estudiante a Biblioteca
-def registrar_estudiante(estudiante):
+def registrar_estudiante(estudiante, historial_biblioteca):
         nombre = input("Ingrese el nombre del estudiante: ")
         rut = input("Ingrese el rut del estudiante: ")
         carrera = input("Ingrese la carrera del alumno: ")
-        estudiante.append({"nombre": nombre,"rut": rut,"carrera": carrera})
+        nuevo_estudiante = {"nombre": nombre, "rut": rut, "carrera": carrera}
+        estudiante.append(nuevo_estudiante)
+        historial_biblioteca.append(copy.deepcopy(nuevo_estudiante))
         print("********************************")
         print("Estudiante agregado/a a Biblioteca Master Senior")
         print("--------------------------------")
@@ -64,7 +69,7 @@ def rut_borrar(estudiante):
             print("--------------------------------")     
 
 # Función consulta de nombres en Biblioteca
-def consulta_estudiante(estudiantes):   # recibe la lista
+def consulta_estudiante(estudiantes):   
     rut_consulta = input("Ingrese rut a consultar: ").strip()
     encontrado = False
 
@@ -80,6 +85,21 @@ def consulta_estudiante(estudiantes):   # recibe la lista
 
     if not encontrado:
         print("No se encontró un estudiante con ese RUT.")
+
+
+# Función para consulta de historial estudiantes ingresados en Biblioteca
+def imprimir_historial(historial_biblioteca):
+    if not historial_biblioteca:
+        print("No hay estudiantes en el historial de Biblioteca.")
+    else:
+        print("--------- Historial de Estudiantes ----------")
+        for i in historial_biblioteca:
+            print("--------------------------------")
+            print("Estudiante:", i["nombre"])
+            print("RUT:", i["rut"])
+            print("Carrera:", i["carrera"])
+        print("------------------------------------")
+
 
 # Función créditos
 def creditos():
@@ -107,7 +127,7 @@ while True:
     opcion = menu()
 
     if opcion == 1:
-        registrar_estudiante(estudiante)
+        registrar_estudiante(estudiante, historial_biblioteca)
 
     elif opcion == 2:
         imprimir_nombres(estudiante)
@@ -119,7 +139,7 @@ while True:
         consulta_estudiante(estudiante)
 
     elif opcion == 5:
-        print("--------------------------------")
+        imprimir_historial(historial_biblioteca)
 
     elif opcion == 6:
         creditos()
